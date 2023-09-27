@@ -1,38 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import
 {
     IconButton,
-    Paper,
-    Box,
-    TextField,
 } from '@mui/material';
 import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid'; // Import DataGrid
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 const HomePage = () =>
 {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
     const API_URL = `${BACKEND_URL}/api/sales`;
     const [sales, setSales] = useState([]);
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
 
-    // Fetch sales data function
-    const fetchSalesData = () =>
+    // Define fetchSalesData as a useCallback
+    const fetchSalesData = useCallback(() =>
     {
         axios
             .get(API_URL)
             .then((response) =>
             {
-                // Add unique IDs to the rows
                 const rowsWithIds = response.data.map((row, index) => ({
                     ...row,
-                    id: index + 1, // You can replace this with an actual unique identifier if available
+                    id: index + 1,
                 }));
                 setSales(rowsWithIds);
             })
@@ -40,7 +31,8 @@ const HomePage = () =>
             {
                 console.error('Error fetching sales data: ', error);
             });
-    };
+    }, [API_URL]);
+    console.log(sales);
 
     const formatDate = (dateString) =>
     {
@@ -58,17 +50,15 @@ const HomePage = () =>
     useEffect(() =>
     {
         fetchSalesData();
-    }, []);
+    }, [fetchSalesData]); // Include fetchSalesData in the dependency array
 
     const handleDelete = (saleId) =>
     {
-        // Send a DELETE request to delete the sale item
         axios
             .delete(`${API_URL}/${saleId}`)
             .then(() =>
             {
                 console.log('Sale deleted');
-                // Update the sales data after successful deletion
                 fetchSalesData();
             })
             .catch((error) =>
@@ -77,7 +67,6 @@ const HomePage = () =>
             });
     };
 
-    // Define columns for the DataGrid
     const columns = [
         { field: 'name', headerName: 'Name', width: 150 },
         { field: 'quantity', headerName: 'Quantity', width: 150 },

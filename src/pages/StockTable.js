@@ -1,6 +1,4 @@
-// StockTable.js
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import
 {
@@ -26,7 +24,7 @@ const StockTable = () =>
   const [stock, setStock] = useState([]);
   const navigate = useNavigate();
 
-  const fetchData = () =>
+  const fetchData = useCallback(() =>
   {
     axios
       .get(API_URL)
@@ -38,12 +36,12 @@ const StockTable = () =>
       {
         console.error('Error fetching stock data: ', error);
       });
-  };
+  }, [API_URL]);
 
   useEffect(() =>
   {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const formatDate = (dateString) =>
   {
