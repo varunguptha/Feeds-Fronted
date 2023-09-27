@@ -10,8 +10,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 const HomePage = () =>
 {
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    const API_URL = `${BACKEND_URL}/api/sales`;
+    const API_URL = 'feeds-backend-mauve.vercel.app/api/sales';
     const [sales, setSales] = useState([]);
 
     // Define fetchSalesData as a useCallback
