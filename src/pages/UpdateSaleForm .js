@@ -10,8 +10,7 @@ const UpdateSaleForm = () =>
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    const API_URL = `${BACKEND_URL}/api/sales/${id}`;
+    const API_URL = `https://feeds-backend-mauve.vercel.app/api/sales/${id}`;
     const [formData, setFormData] = useState({
         name: '',
         quantity: '',
@@ -21,7 +20,6 @@ const UpdateSaleForm = () =>
 
     useEffect(() =>
     {
-        // Fetch sale item data based on the provided ID
         axios
             .get(API_URL)
             .then((response) =>

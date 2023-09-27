@@ -14,8 +14,7 @@ import
 
 const StockForm = ({ onStockAdded }) =>
 {
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    const API_URL = `${BACKEND_URL}/api/stocks`;
+    const API_URL = 'https://feeds-backend-mauve.vercel.app/api/stocks';
 
     const [formData, setFormData] = useState({
         name: '',

@@ -12,8 +12,7 @@ import
 const UpdateStockForm = () =>
 {
     const { id } = useParams();
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    const API_URL = `${BACKEND_URL}/api/stocks/${id}`;
+    const API_URL = `https://feeds-backend-mauve.vercel.app/api/stocks/${id}`;
     const [formData, setFormData] = useState({
         name: '',
         quantity: '',

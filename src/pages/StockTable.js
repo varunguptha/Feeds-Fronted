@@ -19,8 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StockTable = () =>
 {
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-  const API_URL = `${BACKEND_URL}/api/stocks`;
+  const API_URL = 'https://feeds-backend-mauve.vercel.app/api/stocks';
   const [stock, setStock] = useState([]);
   const navigate = useNavigate();
 

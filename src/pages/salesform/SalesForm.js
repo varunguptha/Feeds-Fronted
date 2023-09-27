@@ -14,8 +14,7 @@ import
 
 const SalesForm = ({ onSaleAdded }) =>
 {
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    const API_URL = `${BACKEND_URL}/api/sales`;
+    const API_URL = 'https://feeds-backend-mauve.vercel.app/api/sales';
 
     const [formData, setFormData] = useState({
         name: '',

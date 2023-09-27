@@ -30,12 +30,14 @@ const AppTabs = () =>
                 onChange={handleChange}
                 indicatorColor="primary"
                 textColor="primary"
-                centered
+                variant="scrollable"
+                scrollButtons="auto"
+                aria-label="scrollable auto tabs example"
             >
                 <Tab label="Sales Table" />
-                <Tab label="Sales Form" />
+                <Tab label="Add Sales" />
                 <Tab label="Stock Table" />
-                <Tab label="Stock Form" />
+                <Tab label="Add Stock" />
             </Tabs>
             <TabPanel value={tabValue} index={0}>
                 <SalesTable />
